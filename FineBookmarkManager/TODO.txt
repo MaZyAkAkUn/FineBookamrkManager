@@ -1,0 +1,2 @@
+1. Add bookmark par sing and inserting into DB
+We already have a tree view with foolders, but lets just unify all bookmarks and simply put tham into one db, without folder structurs
