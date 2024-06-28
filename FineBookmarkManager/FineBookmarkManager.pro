@@ -10,11 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     fbm_database.cpp \
+    fbm_databaseview.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     fbm_database.h \
+    fbm_databaseview.h \
     mainwindow.h
 
 # Default rules for deployment.
@@ -22,5 +24,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    TODO.txt
+DISTFILES +=

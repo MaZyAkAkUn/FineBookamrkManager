@@ -31,6 +31,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void setBookmarksDataTable(QWidget* tableWidget);
 private:
     QVBoxLayout* ly_main;
     QPushButton* pb_openBookmarksFile;
@@ -50,6 +52,10 @@ private:
 
     void simplifyJsonStruct(QJsonDocument& bookmarksDoc);
     void parseChildrenSubFolder(QJsonObject& rootObj);
+
+    QWidget* w_bookmarksDataTable;
+
+
 private slots:
     void openFileDialog();
     void autoParseBookmarksFiles();

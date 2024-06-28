@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     ly_main->addWidget(pb_openBookmarksFile);
     ly_main->addWidget(pb_parseBookmarksFiles);
 
-    ly_main->addWidget(te_bookmarksFileContent);
+//    ly_main->addWidget(te_bookmarksFileContent);
 //    ly_main->addWidget(trw_bookmarksTree);
     connect(pb_openBookmarksFile,&QPushButton::clicked, this, &MainWindow::openFileDialog);
     connect(pb_parseBookmarksFiles,&QPushButton::clicked, this, &MainWindow::autoParseBookmarksFiles);
@@ -33,6 +33,12 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::setBookmarksDataTable(QWidget *tableWidget)
+{
+    w_bookmarksDataTable = tableWidget;
+    ly_main->addWidget(w_bookmarksDataTable);
 }
 
 

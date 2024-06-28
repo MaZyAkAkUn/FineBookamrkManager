@@ -3,12 +3,18 @@
 FBM_Database::FBM_Database(QObject *parent)
     : QObject{parent}
 {
-    setupDatabase();
+    if (setupDatabase())
+        fetchBookmarksData();
+}
+
+FBM_Database::~FBM_Database()
+{
+    if(db.isOpen()) db.close();
 }
 
 
 bool FBM_Database::setupDatabase() {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("fbm.db");
 
     if (!db.open()) {
@@ -31,6 +37,15 @@ bool FBM_Database::setupDatabase() {
     return true;
 }
 
+void FBM_Database::fetchBookmarksData()
+{
+    tableModel = new QSqlQueryModel(this);
+    tableModel->setQuery("SELECT title, url FROM bookmarks LIMIT 0, 50", db);
+    tableModel->setHeaderData(0, Qt::Horizontal, "Name");
+    tableModel->setHeaderData(1, Qt::Horizontal, "Url");
+
+}
+
 
 
 bool FBM_Database::addSingleBookmark(const QString &title, const QString &url, const QString &description, const QString &tags) {
@@ -46,6 +61,11 @@ bool FBM_Database::addSingleBookmark(const QString &title, const QString &url, c
         return false;
     }
     return true;
+}
+
+QSqlQueryModel *FBM_Database::getTableModel()
+{
+    return tableModel;
 }
 
 void FBM_Database::addJsonBookmark(QJsonObject jsonBookmark)
